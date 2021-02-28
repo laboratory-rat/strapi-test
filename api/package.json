@@ -1,0 +1,39 @@
+{
+  "name": "ma",
+  "private": true,
+  "version": "0.1.0",
+  "description": "MA",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "gcp-build": "strapi build"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "knex": "<0.20.0",
+    "sqlite3": "5.0.0",
+    "strapi": "3.5.1",
+    "strapi-admin": "3.5.1",
+    "strapi-connector-bookshelf": "3.5.1",
+    "strapi-plugin-content-manager": "3.5.1",
+    "strapi-plugin-content-type-builder": "3.5.1",
+    "strapi-plugin-documentation": "^3.5.1",
+    "strapi-plugin-email": "3.5.1",
+    "strapi-plugin-upload": "3.5.1",
+    "strapi-plugin-users-permissions": "3.5.1",
+    "strapi-utils": "3.5.1"
+  },
+  "author": {
+    "name": "Oleh Tymofieiev",
+    "email": "oleh.tymofieiev@protonmail.com"
+  },
+  "strapi": {
+    "uuid": "61584f84-f265-4cc9-8370-caa7e3a68390"
+  },
+  "engines": {
+    "node": "14.X.X"
+  },
+  "license": "MIT"
+}
