@@ -1,29 +1,49 @@
-version: "3.9"
+version: "3"
 
 services:
-  db:
-    image: postgres
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-  api:
-    image: mad_rat/strapi-test
-    container_name: mr-strapi-test
+  strapi:
+    image: strapi/strapi
+    container_name: ma-strapi
     restart: unless-stopped
-    env_file: .env
-    environment:
-      DATABASE_CLIENT: ${DATABASE_CLIENT}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_HOST: ${DATABASE_HOST}
-      DATABASE_PORT: ${DATABASE_PORT}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-    #    links:
-    #      - mongo:mongo
+    env_file: .api.env
     networks:
-      - strapi-app-network
+      - app-network
     volumes:
-      - ./app:/srv/app
+      - ./.app:/srv/app
     ports:
       - "1337:1337"
+
+
+  api:
+    image: eu.gcr.io/ma-100/api
+    container_name: ma-api
+    build: 
+      context: ../api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .api.env
+    networks:
+      - app-network
+    volumes:
+      - ./.app:/srv/app
+    ports:
+      - "1337:1337"
+
+  pgdatabase:
+    image: postgres
+    container_name: pgdatabase
+    env_file: .pgdatabase.env
+    restart: unless-stopped
+    networks:
+      - app-network
+    volumes:
+      - disk:/data/db
+    ports:
+      - '5432:5432'
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  disk:
